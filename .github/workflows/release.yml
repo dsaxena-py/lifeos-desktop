@@ -41,7 +41,7 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
-      - name: Build and (on tag push) publish a draft release
+      - name: Build and (on tag push) publish a release
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,6 +49,10 @@ jobs:
           tagName: app-v__VERSION__
           releaseName: "Aeon Desktop v__VERSION__"
           releaseBody: "See the assets below to download this version for your platform."
-          releaseDraft: true
+          # Published (not draft): GitHub's public "latest release" API — what
+          # the site's /download page reads to link installers — never
+          # returns draft releases, so a draft here would leave that page
+          # stuck on "no build published yet" even after a successful build.
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}

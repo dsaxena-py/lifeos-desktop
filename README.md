@@ -29,8 +29,10 @@ For a quick dev run without a full production bundle: `npm run tauri dev`.
 
 `.github/workflows/release.yml` builds macOS (Apple Silicon + Intel) and
 Windows in parallel on GitHub's own runners. Trigger it from the Actions tab
-("Run workflow"), or push a tag like `app-v0.1.0` to also cut a draft GitHub
-Release with every installer attached, ready to download.
+("Run workflow"), or push a tag like `app-v0.1.0` to also cut a published
+GitHub Release with every installer attached, ready to download. The
+frontend's `/download` page reads this release via GitHub's public API, so
+it must stay published (not draft).
 
 ## Signing (not set up yet)
 
