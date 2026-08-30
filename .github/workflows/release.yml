@@ -11,6 +11,12 @@ on:
       - "app-v*"
   workflow_dispatch:
 
+# New repos default the GITHUB_TOKEN to read-only, which makes
+# tauri-action's release-creation step fail with "Resource not accessible
+# by integration" — this grants the write scope releases need.
+permissions:
+  contents: write
+
 jobs:
   build:
     strategy:
